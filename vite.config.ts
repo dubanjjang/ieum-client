@@ -20,5 +20,6 @@ export default defineConfig({
   server: {
     port: 3000,
     strictPort: true, // 3000번 포트가 이미 사용 중일 때 다른 포트로 안 바꾸고 에러
+    host: true,
   },
 });
