@@ -47,7 +47,10 @@ export default defineConfig([
     },
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        naver: "readonly",
+      },
     },
     rules: {
       // 코드 품질 관련
