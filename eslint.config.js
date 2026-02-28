@@ -185,6 +185,9 @@ export default defineConfig([
           ],
         },
       ],
+
+      // Fast Refresh 관련
+      "react-refresh/only-export-components": "off", // 하나의 파일은 하나의 컴포넌트만 export 해야한다.
     },
   },
 ]);
