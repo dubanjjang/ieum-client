@@ -48,7 +48,7 @@ export default function NavigationBar() {
             {({ isActive }) => (
               <div
                 className={cn(
-                  "flex size-(--nav-height) flex-col items-center justify-center gap-1 transition-colors duration-200 ease-out",
+                  "text-primary-foreground flex size-(--nav-height) flex-col items-center justify-center gap-1 transition-colors duration-200 ease-out",
                   !isActive && "text-neutral-200",
                 )}
               >
