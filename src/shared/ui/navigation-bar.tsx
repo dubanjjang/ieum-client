@@ -40,7 +40,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export default function NavigationBar() {
   return (
-    <nav className="fixed bottom-0 z-100 mx-auto flex h-(--nav-height) w-full max-w-105 items-center justify-around border-t border-neutral-200 bg-white pb-(--safe-padding)">
+    <nav className="fixed bottom-0 z-100 mx-auto flex h-[calc(var(--nav-height)+var(--safe-padding))] w-full max-w-105 justify-around border-t border-neutral-200 bg-white">
       {NAV_ITEMS.map((item) => {
         const Icon = item.icon;
         return (
