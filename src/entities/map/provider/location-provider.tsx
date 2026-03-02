@@ -6,11 +6,12 @@ interface LocationContextType {
   permitted: boolean;
   currentLocation?: naver.maps.LatLng;
   fetchedLocation?: naver.maps.LatLng;
-  setWatched: (watched: boolean) => void;
+  getCurrentPositionAsync: () => Promise<naver.maps.LatLng>;
+  watchPosition: () => void;
+  clearWatch: () => void;
 }
 
 interface Props {
-  updateLocation: boolean;
   children?: ReactNode;
 }
 
@@ -18,15 +19,26 @@ const LocationContext = createContext<LocationContextType | undefined>(
   undefined,
 );
 
-export function LocationProvider({ updateLocation, children }: Props) {
-  const { permitted, currentLocation, fetchedLocation, setWatched } =
-    useLocation({
-      updateLocation,
-    });
+export function LocationProvider({ children }: Props) {
+  const {
+    permitted,
+    currentLocation,
+    fetchedLocation,
+    getCurrentPositionAsync,
+    watchPosition,
+    clearWatch,
+  } = useLocation();
 
   return (
     <LocationContext
-      value={{ permitted, currentLocation, fetchedLocation, setWatched }}
+      value={{
+        permitted,
+        currentLocation,
+        fetchedLocation,
+        getCurrentPositionAsync,
+        watchPosition,
+        clearWatch,
+      }}
     >
       {children}
     </LocationContext>

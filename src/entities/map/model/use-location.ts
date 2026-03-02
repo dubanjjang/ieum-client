@@ -1,15 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { getDistance } from "@/entities/map/lib/utils";
-
-interface Props {
-  updateLocation: boolean;
-}
 
 const MARKER_UPDATE_DISTANCE = 2;
 const FETCH_UPDATE_DISTANCE = 50;
 
-export default function useLocation({ updateLocation }: Props) {
+export default function useLocation() {
   const [permitted, setPermitted] = useState(false);
 
   const [currentLocation, setCurrentLocation] = useState<
@@ -21,10 +17,9 @@ export default function useLocation({ updateLocation }: Props) {
   const currentLocationRef = useRef(currentLocation ?? null);
   const fetchedLocationRef = useRef(fetchedLocation ?? null);
 
-  const [watched, setWatched] = useState(updateLocation);
   const watchId = useRef<number | null>(null);
 
-  const watchPosition = () => {
+  function watchPosition() {
     watchId.current = navigator.geolocation.watchPosition(
       (loc) => {
         const newLocation = new naver.maps.LatLng({
@@ -72,19 +67,24 @@ export default function useLocation({ updateLocation }: Props) {
         enableHighAccuracy: true,
       },
     );
-  };
+  }
 
-  const clearWatch = () => {
+  function clearWatch() {
     if (!watchId.current) {
       return;
     }
 
     navigator.geolocation.clearWatch(watchId.current);
     watchId.current = null;
-  };
+  }
 
-  useEffect(() => {
-    if (navigator.geolocation) {
+  function getCurrentPositionAsync() {
+    return new Promise<naver.maps.LatLng>((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error("이 브라우저는 Geolocation API를 지원하지 않습니다."));
+        return;
+      }
+
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
           const newLocation = new naver.maps.LatLng({
@@ -95,47 +95,33 @@ export default function useLocation({ updateLocation }: Props) {
           // 위치 권한 허용
           setPermitted(true);
 
-          // 현재 위치와 마지막 패칭 위치를 갱신
+          // 현재 위치와 마지막 패칭 위치 갱신
           setCurrentLocation(newLocation);
           setFetchedLocation(newLocation);
           currentLocationRef.current = newLocation;
           fetchedLocationRef.current = newLocation;
 
-          // 위치를 계속 트래킹
-          if (updateLocation) {
-            clearWatch();
-            watchPosition();
-          }
+          resolve(newLocation);
         },
-        () => {
+        (_) => {
           setPermitted(false);
-          console.error("위치 서비스 이용을 위해 위치 권한을 허용해 주세요.");
+          reject(
+            new Error("위치 서비스 이용을 위해 위치 권한을 허용해 주세요."),
+          );
         },
         {
           enableHighAccuracy: true,
         },
       );
-    } else {
-      console.error("이 브라우저는 Geolocation API를 지원하지 않습니다.");
-    }
-
-    return () => {
-      clearWatch();
-    };
-  }, [updateLocation]);
-
-  useEffect(() => {
-    if (watched) {
-      watchPosition();
-    } else {
-      clearWatch();
-    }
-  }, [watched]);
+    });
+  }
 
   return {
     permitted,
     currentLocation,
     fetchedLocation,
-    setWatched,
+    getCurrentPositionAsync,
+    watchPosition,
+    clearWatch,
   };
 }
