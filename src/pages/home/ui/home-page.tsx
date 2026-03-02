@@ -1,5 +1,10 @@
-import MapViewer from "@/features/map/ui/map-viewer";
+import { LocationProvider } from "@/entities/map/provider/location-provider";
+import MapController from "@/widgets/map/ui/map-controller";
 
 export default function HomePage() {
-  return <MapViewer />;
+  return (
+    <LocationProvider updateLocation>
+      <MapController />
+    </LocationProvider>
+  );
 }
