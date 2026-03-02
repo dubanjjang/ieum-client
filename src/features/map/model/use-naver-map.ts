@@ -3,20 +3,19 @@ import { useEffect, useRef } from "react";
 import useLocationContext from "@/entities/map/provider/location-provider";
 
 interface Props {
-  mapDiv: string;
   mapOptions?: naver.maps.MapOptions;
   initLocation?: naver.maps.LatLng;
   useUserMarker?: boolean;
 }
 
 export default function useNaverMap({
-  mapDiv,
   mapOptions,
   initLocation,
   useUserMarker = false,
 }: Props) {
   const { permitted, currentLocation } = useLocationContext();
 
+  const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<naver.maps.Map>(null);
   const userMarkerRef = useRef<naver.maps.Marker>(null);
 
@@ -38,13 +37,13 @@ export default function useNaverMap({
   }
 
   useEffect(() => {
-    if (mapRef.current) {
+    if (!mapContainerRef.current || mapRef.current) {
       return;
     }
 
     if (initLocation) {
       // 초기 위치가 주어지는 경우
-      mapRef.current = new naver.maps.Map(mapDiv, {
+      mapRef.current = new naver.maps.Map(mapContainerRef.current, {
         center: new naver.maps.LatLng(initLocation),
         zoom: 16,
         ...mapOptions,
@@ -56,11 +55,14 @@ export default function useNaverMap({
     } else {
       // 초기 위치가 주어지지 않는 경우 현재 디바이스의 위치로 설정
       navigator.geolocation.getCurrentPosition(({ coords }) => {
+        if (!mapContainerRef.current) {
+          return;
+        }
         const location = new naver.maps.LatLng(
           coords.latitude,
           coords.longitude,
         );
-        mapRef.current = new naver.maps.Map(mapDiv, {
+        mapRef.current = new naver.maps.Map(mapContainerRef.current, {
           center: location,
           zoom: 16,
           ...mapOptions,
@@ -71,23 +73,28 @@ export default function useNaverMap({
         }
       });
     }
-  }, [mapDiv, mapOptions, initLocation, useUserMarker]);
+  }, [mapOptions, initLocation, useUserMarker]);
 
   useEffect(() => {
+    if (!useUserMarker) {
+      return;
+    }
+
     // 위치 권한이 거부되면, 마커를 렌더링하지 않음
     userMarkerRef.current?.setVisible(permitted);
-  }, [permitted]);
+  }, [useUserMarker, permitted]);
 
   useEffect(() => {
-    if (!currentLocation) {
+    if (!useUserMarker || !currentLocation) {
       return;
     }
 
     // 현재 위치가 바뀌면, 마커의 위치도 갱신
     userMarkerRef.current?.setPosition(currentLocation);
-  }, [currentLocation]);
+  }, [useUserMarker, currentLocation]);
 
   return {
+    mapContainerRef,
     mapRef,
     userMarkerRef,
   };

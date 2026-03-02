@@ -7,8 +7,7 @@ import MapViewer from "@/features/map/ui/map-viewer";
 
 export default function MapController() {
   const { permitted, currentLocation } = useLocationContext();
-  const { mapRef } = useNaverMap({
-    mapDiv: "map",
+  const { mapContainerRef, mapRef } = useNaverMap({
     initLocation: currentLocation,
     useUserMarker: true,
   });
@@ -37,7 +36,11 @@ export default function MapController() {
   return (
     <div className="relative flex flex-1 flex-col">
       <AddressViewer className="absolute top-0 left-0 z-100" />
-      <MapViewer mapDiv="map" mapRef={mapRef} className="flex-1" />
+      <MapViewer
+        mapContainerRef={mapContainerRef}
+        mapRef={mapRef}
+        className="flex-1"
+      />
     </div>
   );
 }
