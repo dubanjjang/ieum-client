@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import OnBoardingCarouselItem from "@/entities/login/ui/on-boarding-carousel-item";
-import OnboardingSlideImage1 from "@/features/login/assets/onboarding_slide_1.webp";
-import OnboardingSlideImage2 from "@/features/login/assets/onboarding_slide_2.webp";
-import OnboardingSlideImage3 from "@/features/login/assets/onboarding_slide_3.webp";
+import OnboardingSlideImage1 from "@/features/login/assets/onboarding-slide-1.webp";
+import OnboardingSlideImage2 from "@/features/login/assets/onboarding-slide-2.webp";
+import OnboardingSlideImage3 from "@/features/login/assets/onboarding-slide-3.webp";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import {
