@@ -1,4 +1,5 @@
-import OnBoardingCarousel from "@/entities/login/ui/on-boarding-carousel";
+
+import OnBoardingCarousel from "@/features/login/ui/on-boarding-carousel";
 import { Button } from "@/shared/ui/button";
 
 export default function LoginPage() {

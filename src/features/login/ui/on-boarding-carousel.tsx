@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import OnboardingSlideImage1 from "@/entities/login/assets/onboarding_slide_1.webp";
-import OnboardingSlideImage2 from "@/entities/login/assets/onboarding_slide_2.webp";
-import OnboardingSlideImage3 from "@/entities/login/assets/onboarding_slide_3.webp";
+import OnBoardingCarouselItem from "@/entities/login/ui/on-boarding-carousel-item";
+import OnboardingSlideImage1 from "@/features/login/assets/onboarding_slide_1.webp";
+import OnboardingSlideImage2 from "@/features/login/assets/onboarding_slide_2.webp";
+import OnboardingSlideImage3 from "@/features/login/assets/onboarding_slide_3.webp";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import {
@@ -72,24 +73,11 @@ export default function OnBoardingCarousel({ className }: Props) {
         <CarouselContent>
           {CAROUSEL_ITEM.map((item, index) => (
             <CarouselItem key={index}>
-              <div className="flex flex-col items-center justify-center gap-y-4">
-                <div className="flex h-70 items-center justify-center">
-                  <img
-                    src={item.img}
-                    alt={`OnBoarding Image ${index + 1}`}
-                    className="w-64 object-cover"
-                  />
-                </div>
-
-                <div className="space-y-2 text-center">
-                  <h1 className="text-primary-foreground text-lg font-semibold">
-                    {item.title}
-                  </h1>
-                  <p className="text-muted-foreground text-sm font-normal break-all whitespace-pre-wrap">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
+              <OnBoardingCarouselItem
+                title={item.title}
+                description={item.description}
+                img={item.img}
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
