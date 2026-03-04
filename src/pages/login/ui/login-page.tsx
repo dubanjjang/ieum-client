@@ -1,4 +1,4 @@
-
+import LoginDrawer from "@/features/login/ui/login-drawer";
 import OnBoardingCarousel from "@/features/login/ui/on-boarding-carousel";
 import { Button } from "@/shared/ui/button";
 
@@ -7,7 +7,7 @@ export default function LoginPage() {
     <div className="flex flex-1 flex-col">
       <OnBoardingCarousel className="flex-1" />
       <div className="w-full space-y-1 px-4 pb-6">
-        <Button className="w-full">로그인</Button>
+        <LoginDrawer />
         <div className="text-muted-foreground text-center text-sm">
           이음이 처음이신가요?{" "}
           <Button variant="link" className="p-0">
