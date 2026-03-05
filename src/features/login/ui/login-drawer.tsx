@@ -12,7 +12,11 @@ import {
   DrawerTrigger,
 } from "@/shared/ui/drawer";
 
-export default function LoginDrawer() {
+interface Props {
+  onClickEmailLogin?: () => void;
+}
+
+export default function LoginDrawer({ onClickEmailLogin }: Props) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -49,7 +53,9 @@ export default function LoginDrawer() {
           </div>
 
           <DrawerFooter>
-            <Button>이메일로 로그인</Button>
+            <Button className="w-full" onClick={onClickEmailLogin}>
+              이메일로 로그인
+            </Button>
           </DrawerFooter>
         </div>
       </DrawerContent>
