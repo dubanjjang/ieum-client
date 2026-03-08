@@ -16,9 +16,7 @@ export default function OnBoardingCarouselItem({
       </div>
 
       <div className="space-y-2 text-center">
-        <h1 className="text-primary-foreground text-lg font-semibold">
-          {title}
-        </h1>
+        <h1 className="text-primary text-lg font-semibold">{title}</h1>
         <p className="text-muted-foreground text-sm font-normal break-all whitespace-pre-wrap">
           {description}
         </p>
