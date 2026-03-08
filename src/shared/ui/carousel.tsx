@@ -177,7 +177,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 
 function CarouselPrevious({
   className,
-  variant = "outline",
+  variant = "ghost",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -189,7 +189,8 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-none border-none bg-transparent text-neutral-300 shadow-none hover:bg-transparent disabled:text-transparent",
+        "text-primary absolute size-8 rounded-none border-none bg-transparent shadow-none hover:bg-transparent",
+        "disabled:cursor-default disabled:bg-transparent disabled:text-transparent disabled:hover:bg-transparent",
         orientation === "horizontal"
           ? "top-1/2 left-0 -translate-y-1/2"
           : "top-0 left-1/2 -translate-x-1/2 rotate-90",
@@ -207,7 +208,7 @@ function CarouselPrevious({
 
 function CarouselNext({
   className,
-  variant = "outline",
+  variant = "ghost",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -219,7 +220,8 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-none border-none bg-transparent text-neutral-300 shadow-none hover:bg-transparent disabled:text-transparent",
+        "text-primary absolute size-8 rounded-none border-none bg-transparent shadow-none hover:bg-transparent",
+        "disabled:cursor-default disabled:bg-transparent disabled:text-transparent disabled:hover:bg-transparent",
         orientation === "horizontal"
           ? "top-1/2 right-0 -translate-y-1/2"
           : "bottom-0 left-1/2 -translate-x-1/2 rotate-90",

@@ -27,7 +27,7 @@ function Input({
       data-disabled={disabled ? "" : undefined}
       aria-invalid={isInvalid ? "true" : undefined}
       className={cn(
-        "border-input flex w-full items-center gap-x-2 rounded-lg border bg-white shadow-xs transition-[color,box-shadow]",
+        "border-input bg-background flex w-full items-center gap-x-2 rounded-lg border shadow-xs transition-[color,box-shadow]",
         "focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-2",
         "aria-invalid:ring-destructive/30 aria-invalid:border-destructive aria-invalid:ring-2",
         "data-disabled:bg-muted data-disabled:cursor-not-allowed data-disabled:opacity-50",
@@ -52,10 +52,11 @@ function Input({
         <Button
           type="button"
           variant="ghost"
+          size="sm"
           tabIndex={-1} // 키보드로도 포커스 안되게 처리
           disabled={disabled}
           aria-label={revealed ? "비밀번호 숨기기" : "비밀번호 표시"}
-          className="text-muted-foreground hover:bg-transparent"
+          className="text-muted-foreground mr-1 p-0 hover:bg-transparent"
           onClick={() => setRevealed((prev) => !prev)}
         >
           {revealed ? (
