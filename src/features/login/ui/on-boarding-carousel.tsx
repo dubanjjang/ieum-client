@@ -81,8 +81,8 @@ export default function OnBoardingCarousel({ className }: Props) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="disabled:bg-transparent [&>svg]:animate-pulse disabled:[&>svg]:animate-none" />
-        <CarouselNext className="disabled:bg-transparent [&>svg]:animate-pulse disabled:[&>svg]:animate-none" />
+        <CarouselPrevious className="[&>svg]:animate-pulse disabled:[&>svg]:animate-none" />
+        <CarouselNext className="[&>svg]:animate-pulse disabled:[&>svg]:animate-none" />
       </Carousel>
 
       <div className="flex w-full justify-center">
@@ -96,7 +96,7 @@ export default function OnBoardingCarousel({ className }: Props) {
             <div
               key={index}
               className={cn(
-                "size-2.5 cursor-pointer rounded-full bg-neutral-200",
+                "bg-primary-foreground size-2.5 cursor-pointer rounded-full",
                 index + 1 === current && "bg-primary",
               )}
             />
