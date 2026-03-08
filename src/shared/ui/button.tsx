@@ -5,7 +5,7 @@ import { Slot } from "radix-ui";
 import { cn } from "@/shared/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-2 aria-invalid:ring-destructive/30 aria-invalid:border-destructive cursor-pointer disabled:opacity-50 disabled:bg-muted disabled:text-muted-foreground",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium transition-all [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-2 aria-invalid:ring-destructive/30 aria-invalid:border-destructive cursor-pointer disabled:opacity-50 disabled:bg-muted disabled:text-muted-foreground disabled:hover:cursor-not-allowed",
   {
     variants: {
       variant: {
@@ -37,6 +37,7 @@ const buttonVariants = cva(
 
 function Button({
   className,
+  type = "button",
   variant = "default",
   size = "default",
   asChild = false,
@@ -52,6 +53,7 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
+      type={type}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
