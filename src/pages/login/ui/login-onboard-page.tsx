@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import LoginDrawer from "@/features/login/ui/login-drawer";
 import OnBoardingCarousel from "@/features/login/ui/on-boarding-carousel";
 import { Button } from "@/shared/ui/button";
@@ -14,8 +16,8 @@ export default function LoginOnBoardPage({ onClickLogin }: Props) {
         <LoginDrawer onClickEmailLogin={onClickLogin} />
         <div className="text-muted-foreground text-center text-sm">
           이음이 처음이신가요?{" "}
-          <Button variant="link" className="p-0">
-            회원가입
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/signup">회원가입</Link>
           </Button>
         </div>
       </div>
