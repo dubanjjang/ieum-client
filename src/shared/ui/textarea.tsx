@@ -2,16 +2,43 @@ import * as React from "react";
 
 import { cn } from "@/shared/lib/utils";
 
-function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
+interface Props extends React.ComponentProps<"textarea"> {
+  textareaClassName?: string;
+}
+
+function Textarea({
+  disabled,
+  className,
+  textareaClassName,
+  "aria-invalid": ariaInvalid,
+  ...props
+}: Props) {
+  const isInvalid = ariaInvalid === true || ariaInvalid === "true";
+
   return (
-    <textarea
-      data-slot="textarea"
+    <div
+      data-disabled={disabled ? "" : undefined}
+      aria-invalid={isInvalid ? "true" : undefined}
       className={cn(
-        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "border-input w-full rounded-lg border bg-white p-1.5 shadow-xs transition-[color,box-shadow]",
+        "focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-2",
+        "aria-invalid:ring-destructive/30 aria-invalid:border-destructive aria-invalid:ring-2",
+        "data-disabled:bg-muted data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className,
       )}
-      {...props}
-    />
+    >
+      <textarea
+        data-slot="textarea"
+        aria-invalid={ariaInvalid}
+        disabled={disabled}
+        className={cn(
+          "placeholder:text-muted min-h-24 w-full resize-none px-2 py-1 outline-none",
+          "disabled:bg-muted disabled:cursor-not-allowed disabled:opacity-50",
+          textareaClassName,
+        )}
+        {...props}
+      />
+    </div>
   );
 }
 
