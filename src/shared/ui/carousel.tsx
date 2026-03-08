@@ -2,7 +2,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
@@ -177,7 +177,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 
 function CarouselPrevious({
   className,
-  variant = "outline",
+  variant = "ghost",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -189,17 +189,18 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "text-primary absolute size-8 rounded-none border-none bg-transparent shadow-none hover:bg-transparent",
+        "disabled:cursor-default disabled:bg-transparent disabled:text-transparent disabled:hover:bg-transparent",
         orientation === "horizontal"
-          ? "top-1/2 -left-12 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "top-1/2 left-0 -translate-y-1/2"
+          : "top-0 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      <ChevronLeft className="size-6" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -207,7 +208,7 @@ function CarouselPrevious({
 
 function CarouselNext({
   className,
-  variant = "outline",
+  variant = "ghost",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -219,17 +220,18 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "text-primary absolute size-8 rounded-none border-none bg-transparent shadow-none hover:bg-transparent",
+        "disabled:cursor-default disabled:bg-transparent disabled:text-transparent disabled:hover:bg-transparent",
         orientation === "horizontal"
-          ? "top-1/2 -right-12 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "top-1/2 right-0 -translate-y-1/2"
+          : "bottom-0 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      <ChevronRight className="size-6" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
