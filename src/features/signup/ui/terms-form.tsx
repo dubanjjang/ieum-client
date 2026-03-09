@@ -8,7 +8,7 @@ interface Props {
 
 export default function TermsForm({ onSubmit }: Props) {
   return (
-    <div className="relative flex flex-1 flex-col px-6 py-8">
+    <div className="relative flex flex-1 flex-col overflow-hidden px-6 py-8">
       <div className="z-10 flex flex-1 flex-col gap-y-10">
         <h1 className="truncate text-xl font-bold">
           서비스 이용 약관에 동의해 주세요.
