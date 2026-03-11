@@ -31,10 +31,7 @@ export default function SignupForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex h-dvh flex-1 flex-col px-6 py-8"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-1 flex-col">
       <div className="space-y-5">
         <h1 className="truncate text-xl font-bold">{title}</h1>
 
