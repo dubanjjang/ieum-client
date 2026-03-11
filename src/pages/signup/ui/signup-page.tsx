@@ -19,7 +19,7 @@ export default function SignupPage() {
 
   function handlePrevious() {
     if (stepIndex === 0) {
-      nav("/login");
+      nav("/terms");
     } else {
       setStep(STEPS[stepIndex - 1]);
     }

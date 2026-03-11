@@ -1,4 +1,5 @@
 import type { SubmitEvent } from "react";
+import { Link } from "react-router";
 
 import IeumText from "@/shared/assets/ieum-text.svg";
 import { Button } from "@/shared/ui/button";
@@ -81,8 +82,9 @@ export default function LoginForm() {
             variant="ghost"
             size="sm"
             className="flex-1 p-0 text-sm hover:bg-transparent"
+            asChild
           >
-            회원가입
+            <Link to="/terms"> 회원가입</Link>
           </Button>
           <div className="h-4 w-px bg-neutral-200" />
           <Button

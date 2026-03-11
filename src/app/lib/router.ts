@@ -7,6 +7,7 @@ import NotFoundPage from "@/pages/not-found/ui/not-found-page";
 import ReportPage from "@/pages/report/ui/report-page";
 import SettingPage from "@/pages/setting/setting-page";
 import SignupPage from "@/pages/signup/ui/signup-page";
+import TermsPage from "@/pages/terms/ui/terms-page";
 import MainLayout from "@/shared/ui/main-layout";
 import MobileLayout from "@/shared/ui/mobile-layout";
 
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: LoginPage,
+      },
+      {
+        path: "/terms",
+        Component: TermsPage,
       },
       {
         path: "/signup",

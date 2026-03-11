@@ -1,14 +1,13 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router";
 
 import { Button } from "@/shared/ui/button";
+import { Checkbox } from "@/shared/ui/checkbox";
+import { Label } from "@/shared/ui/label";
 
-interface Props {
-  onSubmit?: () => void;
-}
-
-export default function TermsForm({ onSubmit }: Props) {
+export default function TermsForm() {
   return (
-    <div className="relative flex flex-1 flex-col overflow-hidden px-6 py-8">
+    <div className="relative flex flex-1 flex-col overflow-hidden">
       <div className="z-10 flex flex-1 flex-col gap-y-10">
         <h1 className="truncate text-xl font-bold">
           서비스 이용 약관에 동의해 주세요.
@@ -16,47 +15,64 @@ export default function TermsForm({ onSubmit }: Props) {
 
         <div className="space-y-4">
           <div className="flex items-center gap-x-3">
-            <input id="all" type="checkbox" />
-            <label htmlFor="all" className="text-lg font-medium">
+            <Checkbox id="all" />
+            <Label htmlFor="all" className="text-base">
               네, 모두 동의합니다.
-            </label>
+            </Label>
           </div>
 
-          <div className="h-px w-full bg-neutral-200"></div>
+          <div className="h-px w-full bg-neutral-200" />
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <input id="personal-infomation" type="checkbox" />
-              <label htmlFor="personal-infomation">
+              <Checkbox id="personal-infomation" />
+              <Label htmlFor="personal-infomation" className="font-normal">
                 (필수) 개인정보 처리 방침
-              </label>
+              </Label>
             </div>
 
-            <Button variant="ghost" size="sm" className="text-neutral-300">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-neutral-300"
+              aria-label="약관 상세보기"
+            >
               <ChevronRight className="size-5" />
             </Button>
           </div>
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <input id="location-service" type="checkbox" />
-              <label htmlFor="location-service">
+              <Checkbox id="location-service" />
+              <Label htmlFor="location-service" className="font-normal">
                 (필수) 위치기반 서비스 이용약관
-              </label>
+              </Label>
             </div>
 
-            <Button variant="ghost" size="sm" className="text-neutral-300">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-neutral-300"
+              aria-label="약관 상세보기"
+            >
               <ChevronRight className="size-5" />
             </Button>
           </div>
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <input id="push-alarm" type="checkbox" />
-              <label htmlFor="push-alarm">(선택) 푸쉬 알림 수신 동의</label>
+              <Checkbox id="push-alarm" />
+              <Label htmlFor="push-alarm" className="font-normal">
+                (선택) 푸쉬 알림 수신 동의
+              </Label>
             </div>
 
-            <Button variant="ghost" size="sm" className="text-neutral-300">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-neutral-300"
+              aria-label="약관 상세보기"
+            >
               <ChevronRight className="size-5" />
             </Button>
           </div>
@@ -68,8 +84,8 @@ export default function TermsForm({ onSubmit }: Props) {
         </div>
 
         <div className="flex flex-1 flex-col justify-end">
-          <Button onClick={onSubmit} className="w-full">
-            다음
+          <Button className="w-full" asChild>
+            <Link to="/signup">다음</Link>
           </Button>
         </div>
       </div>
