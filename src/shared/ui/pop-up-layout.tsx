@@ -47,7 +47,7 @@ export default function PopUpLayout({
         </div>
       </header>
 
-      <div className="flex-1">{children}</div>
+      <div className="flex flex-1 flex-col px-5 py-8">{children}</div>
     </div>
   );
 }
