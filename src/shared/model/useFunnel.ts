@@ -1,7 +1,7 @@
 import { Children, isValidElement, type ReactNode, useState } from "react";
 
 interface Props {
-  initStep: string;
+  steps: string[];
 }
 
 interface FunnelProps {
@@ -12,8 +12,10 @@ interface StepProps {
   name: string;
   children: ReactNode;
 }
-export default function useFunnel({ initStep }: Props) {
-  const [step, setStep] = useState(initStep);
+
+export default function useFunnel({ steps }: Props) {
+  const [step, setStep] = useState(steps[0]);
+  const stepIndex = steps.indexOf(step);
 
   const Funnel = ({ children }: FunnelProps) => {
     const currentStep = Children.toArray(children).find(
@@ -23,5 +25,5 @@ export default function useFunnel({ initStep }: Props) {
   };
   const FunnelStep = ({ children }: StepProps) => children;
 
-  return { Funnel, FunnelStep, setStep };
+  return { Funnel, FunnelStep, setStep, step, stepIndex };
 }
