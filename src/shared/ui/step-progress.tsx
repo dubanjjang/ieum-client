@@ -9,6 +9,7 @@ interface Props extends React.ComponentProps<typeof ProgressPrimitive.Root> {
   stepLabelList?: string[];
   stepClassName?: string;
   indicatorClassName?: string;
+  labelClassName?: string;
 }
 
 export default function StepProgress({
@@ -17,6 +18,7 @@ export default function StepProgress({
   stepClassName,
   className,
   indicatorClassName,
+  labelClassName,
   value,
   ...props
 }: Props) {
@@ -29,17 +31,17 @@ export default function StepProgress({
     stepCount <= 1 ? 100 : (completedStep / (stepCount - 1)) * 100;
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Progress
         value={progressValue}
         {...props}
-        className={cn("h-1", className)}
+        className={cn("absolute top-1/2 h-1 -translate-y-1/2", className)}
         indicatorClassName={indicatorClassName}
       />
 
-      <div className="absolute inset-y-0 left-0 flex w-full items-center justify-between">
+      <div className="relative flex w-full items-center justify-between">
         {Array.from({ length: stepCount }).map((_, i) => (
-          <div key={i} className="relative">
+          <div key={i} className="relative z-10">
             <div
               className={cn(
                 "bg-primary-foreground flex size-7 items-center justify-center rounded-full text-center text-sm font-medium text-white select-none",
@@ -55,6 +57,7 @@ export default function StepProgress({
                 className={cn(
                   "text-primary-foreground absolute top-full left-1/2 mt-1 -translate-x-1/2 text-xs font-medium whitespace-nowrap",
                   i <= completedStep && "text-primary",
+                  labelClassName,
                 )}
               >
                 {stepLabelList[i]}
