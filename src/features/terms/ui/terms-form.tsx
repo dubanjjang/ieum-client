@@ -1,11 +1,36 @@
 import { ChevronRight } from "lucide-react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
+import useTerms from "@/features/terms/model/use-terms";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Label } from "@/shared/ui/label";
 
 export default function TermsForm() {
+  const nav = useNavigate();
+  const { termsData, setTermsData } = useTerms();
+
+  const allChecked = Object.values(termsData).every(Boolean);
+
+  function handleToggle(field: keyof typeof termsData) {
+    setTermsData((prev) => ({ ...prev, [field]: !prev[field] }));
+  }
+
+  function handleToggleAll() {
+    const next = !allChecked;
+    setTermsData({
+      personalInformation: next,
+      locationService: next,
+      pushAlarm: next,
+    });
+  }
+
+  function handleNext() {
+    if (termsData.personalInformation && termsData.locationService) {
+      nav("/signup", { state: { termsData } });
+    }
+  }
+
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden">
       <div className="z-10 flex flex-1 flex-col gap-y-10">
@@ -15,7 +40,11 @@ export default function TermsForm() {
 
         <div className="space-y-4">
           <div className="flex items-center gap-x-3">
-            <Checkbox id="all" />
+            <Checkbox
+              id="all"
+              checked={allChecked}
+              onCheckedChange={handleToggleAll}
+            />
             <Label htmlFor="all" className="text-base">
               네, 모두 동의합니다.
             </Label>
@@ -25,7 +54,11 @@ export default function TermsForm() {
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <Checkbox id="personal-infomation" />
+              <Checkbox
+                id="personal-infomation"
+                checked={termsData.personalInformation}
+                onCheckedChange={() => handleToggle("personalInformation")}
+              />
               <Label htmlFor="personal-infomation" className="font-normal">
                 (필수) 개인정보 처리 방침
               </Label>
@@ -43,7 +76,11 @@ export default function TermsForm() {
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <Checkbox id="location-service" />
+              <Checkbox
+                id="location-service"
+                checked={termsData.locationService}
+                onCheckedChange={() => handleToggle("locationService")}
+              />
               <Label htmlFor="location-service" className="font-normal">
                 (필수) 위치기반 서비스 이용약관
               </Label>
@@ -61,7 +98,11 @@ export default function TermsForm() {
 
           <div className="flex items-center gap-x-2">
             <div className="flex flex-1 items-center gap-x-3">
-              <Checkbox id="push-alarm" />
+              <Checkbox
+                id="push-alarm"
+                checked={termsData.pushAlarm}
+                onCheckedChange={() => handleToggle("pushAlarm")}
+              />
               <Label htmlFor="push-alarm" className="font-normal">
                 (선택) 푸쉬 알림 수신 동의
               </Label>
@@ -84,8 +125,14 @@ export default function TermsForm() {
         </div>
 
         <div className="flex flex-1 flex-col justify-end">
-          <Button className="w-full" asChild>
-            <Link to="/signup">다음</Link>
+          <Button
+            className="w-full"
+            onClick={handleNext}
+            disabled={
+              !termsData.personalInformation || !termsData.locationService
+            }
+          >
+            다음
           </Button>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { z } from "zod";
 
+import type { TermsData } from "@/features/terms/model/use-terms";
+
 export const SIGNUP_STEPS = [
   { step: "email-form", label: "이메일" },
   { step: "password-form", label: "비밀번호" },
@@ -31,7 +33,8 @@ export const signupSchema = z
 
 export type SignupFormData = z.infer<typeof signupSchema>;
 
-export default function useSignup() {
+// TO DO: 회원가입 API 호출 시, 약관 동의 상태(termsData)를 같이 body에 추가해주어야 함
+export default function useSignup(termsData: TermsData) {
   const [signupData, setSignupData] = useState<SignupFormData>({
     email: "",
     password: "",
