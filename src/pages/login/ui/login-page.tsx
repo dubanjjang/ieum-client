@@ -15,7 +15,7 @@ export default function LoginPage() {
         <LoginOnBoardPage onClickLogin={() => setStep("form")} />
       </FunnelStep>
       <FunnelStep name="form">
-        <Fade delay={0.3} className="flex flex-1 flex-col">
+        <Fade delay={0.2} className="flex flex-1 flex-col">
           <PopUpLayout
             className="flex flex-1 flex-col"
             onPrev={() => setStep("onboard")}

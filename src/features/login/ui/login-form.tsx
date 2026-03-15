@@ -1,12 +1,15 @@
 import type { SubmitEvent } from "react";
 import { Link } from "react-router";
 
+import useLogin from "@/features/login/model/use-login";
 import IeumText from "@/shared/assets/ieum-text.svg";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 
 export default function LoginForm() {
+  const { errorMessage } = useLogin();
+
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -63,7 +66,7 @@ export default function LoginForm() {
             name="password"
             placeholder="비밀번호를 입력해 주세요..."
             className="mt-1"
-            maxLength={72}
+            maxLength={30}
             required
             autoComplete="current-password"
             enterKeyHint="done" // 모바일 화면에서 자판에 '이동'이 아닌 '완료'로 표시 됨
@@ -71,39 +74,43 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <div className="mt-3 space-y-2">
-        <Button type="submit" className="w-full">
-          로그인
-        </Button>
+      <div className="space-y-4">
+        <p className="text-destructive text-xs">{errorMessage}</p>
 
-        <div className="text-muted-foreground flex items-center text-center text-sm">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="flex-1 p-0 text-sm hover:bg-transparent"
-            asChild
-          >
-            <Link to="/terms"> 회원가입</Link>
+        <div className="space-y-2">
+          <Button type="submit" className="w-full">
+            로그인
           </Button>
-          <div className="h-4 w-px bg-neutral-200" />
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="flex-1 p-0 text-sm hover:bg-transparent"
-          >
-            이메일 찾기
-          </Button>
-          <div className="h-4 w-px bg-neutral-200" />
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="flex-1 p-0 text-sm hover:bg-transparent"
-          >
-            비밀번호 찾기
-          </Button>
+
+          <div className="text-muted-foreground flex items-center text-center text-sm">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="flex-1 p-0 text-sm hover:bg-transparent"
+              asChild
+            >
+              <Link to="/terms">회원가입</Link>
+            </Button>
+            <div className="h-4 w-px bg-neutral-200" />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="flex-1 p-0 text-sm hover:bg-transparent"
+            >
+              이메일 찾기
+            </Button>
+            <div className="h-4 w-px bg-neutral-200" />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="flex-1 p-0 text-sm hover:bg-transparent"
+            >
+              비밀번호 찾기
+            </Button>
+          </div>
         </div>
       </div>
     </form>
