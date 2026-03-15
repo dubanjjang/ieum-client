@@ -1,33 +1,34 @@
 import type { InputHTMLAttributes, SubmitEvent } from "react";
 
+import type { SignupFormData } from "@/features/signup/model/use-signup";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
 interface Props {
   title: string;
-  field: string;
+  signupData: SignupFormData;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
   buttonText?: string;
-  validator?: (inputData: string) => boolean;
-  onSubmit?: () => void;
+  errorMessage?: string;
+  onSubmit?: (inputData: string) => void;
 }
 
 export default function SignupForm({
   title,
-  field,
+  signupData,
   inputProps,
   buttonText = "다음",
-  validator,
+  errorMessage,
   onSubmit,
 }: Props) {
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const inputData = String(formData.get(field) ?? "");
-    onSubmit?.();
-
-    console.log(`$✅ {field} SignupForm 제출\n- 값: ${inputData}`);
+    const inputData = inputProps?.name
+      ? String(formData.get(inputProps.name))
+      : "";
+    onSubmit?.(inputData);
   };
 
   return (
@@ -36,16 +37,25 @@ export default function SignupForm({
         <h1 className="truncate text-xl font-bold">{title}</h1>
 
         <div className="space-y-4">
-          <Input name={field} {...inputProps} required autoFocus />
+          <Input
+            {...inputProps}
+            required
+            autoFocus
+            aria-invalid={!!errorMessage}
+          />
 
           {inputProps?.type === "password" && (
             <Input
-              name="password-check"
               {...inputProps}
+              name="passwordCheck"
+              value={signupData.passwordCheck}
               placeholder="비밀번호를 한 번 더 입력해 주세요..."
+              aria-invalid={!!errorMessage}
               required
             />
           )}
+
+          <p className="text-destructive text-xs">{errorMessage}</p>
         </div>
       </div>
 
