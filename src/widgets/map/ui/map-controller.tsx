@@ -2,8 +2,9 @@ import { AlertTriangle } from "lucide-react";
 
 import useLocationContext from "@/entities/map/provider/location-provider";
 import useNaverMap from "@/features/map/model/use-naver-map";
-import AddressViewer from "@/features/map/ui/address-viewer";
 import MapViewer from "@/features/map/ui/map-viewer";
+import PostCreateButton from "@/features/post/ui/post-create-button";
+import PostListButton from "@/features/post/ui/post-list-button";
 
 export default function MapController() {
   const { permitted, currentLocation } = useLocationContext();
@@ -34,13 +35,13 @@ export default function MapController() {
   }
 
   return (
-    <div className="relative flex flex-1 flex-col">
-      <AddressViewer className="absolute top-0 left-0 z-100" />
-      <MapViewer
-        mapContainerRef={mapContainerRef}
-        mapRef={mapRef}
-        className="flex-1"
-      />
-    </div>
+    <MapViewer
+      useReverseGeocode
+      mapContainerRef={mapContainerRef}
+      mapRef={mapRef}
+      className="flex-1"
+      bottomCenterActions={<PostListButton />}
+      bottomRightActions={<PostCreateButton />}
+    />
   );
 }
