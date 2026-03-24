@@ -137,7 +137,21 @@
   src: url("/fonts/woff2/PretendardVariable.woff2") format("woff2-variations");
 }
 
+@utility scrollbar-hide {
+  -ms-overflow-style: none; /* MS 계열 브라우저의 스크롤바 스타일을 제거 */
+  scrollbar-width: none; /* W3C 표준 속성, 스크롤바 너비를 없앰 */
+  &::-webkit-scrollbar {
+    display: none; /* Webkit/Blink 엔진의 스크롤바 의사 요소를 숨김 */
+  }
+}
+
 body {
   font-family: "Pretendard Variable";
-  overflow-y: scroll;
+  overflow-y: scroll; /* 항상 스크롤바가 존재하도록 설정하여 컨텐츠가 많아져 스크롤이 생길 때, 전체적인 UI가 밀리지 않도록 설정 */
+}
+
+/* body[data-scroll-locked]로만 설정할 경우에는 이미 !important가 적용되어 덮어쓰여지지 않으므로 선택자를 구체화하여 우선순위를 높임 */
+html body[data-scroll-locked] {
+  overflow-y: scroll !important; /* Drawer, Modal 등 오버레이가 렌더링 되더라도 스크롤바를 유지하여 UI가 밀리지 않도록 함 */
+  margin-right: 0px !important; /* vaul 혹은 radix-ui 내부적으로 오버레이가 렌더링될 때 스크롤바 영역만큼 마진이 추가되는 것을 방지 */
 }
