@@ -11,8 +11,8 @@ export default function OnBoardingCarouselItem({
 }: Props) {
   return (
     <div className="flex flex-col items-center justify-center gap-y-4">
-      <div className="flex h-70 items-center justify-center">
-        <img src={img} alt={"OnBoarding Image"} className="w-64 object-cover" />
+      <div className="flex h-64 items-center justify-center">
+        <img src={img} alt={"OnBoarding Image"} className="w-60 object-cover" />
       </div>
 
       <div className="space-y-2 text-center">

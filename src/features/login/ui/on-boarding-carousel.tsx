@@ -19,7 +19,7 @@ interface Props {
   className?: string;
 }
 
-const CAROUSEL_ITEM = [
+const CAROUSEL_ITEMS = [
   {
     title: "나의 이야기를 지도에 남겨요",
     description:
@@ -71,7 +71,7 @@ export default function OnBoardingCarousel({ className }: Props) {
     >
       <Carousel setApi={setApi} className="w-full">
         <CarouselContent>
-          {CAROUSEL_ITEM.map((item, index) => (
+          {CAROUSEL_ITEMS.map((item, index) => (
             <CarouselItem key={index}>
               <OnBoardingCarouselItem
                 title={item.title}
@@ -86,7 +86,7 @@ export default function OnBoardingCarousel({ className }: Props) {
       </Carousel>
 
       <div className="flex w-full justify-center">
-        {CAROUSEL_ITEM.map((_, index) => (
+        {CAROUSEL_ITEMS.map((_, index) => (
           <Button
             variant="ghost"
             size="xs"

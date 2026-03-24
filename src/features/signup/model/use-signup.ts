@@ -1,56 +1,29 @@
 import { useState } from "react";
-import { z } from "zod";
 
 import type { TermsData } from "@/features/terms/model/use-terms";
 
-export const SIGNUP_STEPS = [
-  { step: "email-form", label: "이메일" },
-  { step: "password-form", label: "비밀번호" },
-  { step: "nickname-form", label: "닉네임" },
-] as const;
-
-export const signupSchema = z
-  .object({
-    email: z.email("올바른 이메일 형식이 아니에요."),
-    password: z
-      .string()
-      .min(8, "비밀번호는 8자 이상으로 구성되어야 해요.")
-      .max(29, "비밀번호는 30자 미만으로 구성되어야 해요.")
-      .regex(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
-        "비밀번호는 영문, 숫자, 특수문자를 최소 하나씩 포함해야 해요.",
-      ),
-    passwordCheck: z.string(),
-    nickname: z
-      .string()
-      .min(2, "닉네임은 2자 이상으로 구성되어야 해요.")
-      .max(10, "닉네임은 10자 이하로 구성되어야 해요."),
-  })
-  .refine((data) => data.password === data.passwordCheck, {
-    message: "비밀번호가 일치하지 않아요.",
-    path: ["passwordCheck"],
-  });
-
-export type SignupFormData = z.infer<typeof signupSchema>;
+interface SignupData {
+  nickname: string;
+}
 
 // TO DO: 회원가입 API 호출 시, 약관 동의 상태(termsData)를 같이 body에 추가해주어야 함
 export default function useSignup(termsData: TermsData) {
-  const [signupData, setSignupData] = useState<SignupFormData>({
-    email: "",
-    password: "",
-    passwordCheck: "",
+  const [signupData, setSignupData] = useState<SignupData>({
     nickname: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
 
-  function validate(field: keyof SignupFormData) {
-    const result = signupSchema.safeParse(signupData);
-    if (!result.success) {
-      const fieldError = result.error.issues.find(
-        (issue) => issue.path[0] === field,
-      );
-      if (fieldError) {
-        setErrorMessage(fieldError.message);
+  function validate(field: keyof SignupData) {
+    const { nickname } = signupData;
+
+    if (field === "nickname") {
+      if (nickname.length < 2 || nickname.length > 10) {
+        setErrorMessage("닉네임은 2자 이상 10자 이하로 구성되어야 해요.");
+        return false;
+      }
+
+      if (/[^a-zA-Z0-9가-힣]/.test(nickname)) {
+        setErrorMessage("닉네임에 특수문자는 사용할 수 없어요.");
         return false;
       }
     }

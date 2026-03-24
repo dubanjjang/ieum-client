@@ -1,12 +1,10 @@
 import type { InputHTMLAttributes, SubmitEvent } from "react";
 
-import type { SignupFormData } from "@/features/signup/model/use-signup";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
 interface Props {
   title: string;
-  signupData: SignupFormData;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
   buttonText?: string;
   errorMessage?: string;
@@ -15,7 +13,6 @@ interface Props {
 
 export default function SignupForm({
   title,
-  signupData,
   inputProps,
   buttonText = "다음",
   errorMessage,
@@ -44,7 +41,7 @@ export default function SignupForm({
             aria-invalid={!!errorMessage}
           />
 
-          {inputProps?.type === "password" && (
+          {/* {inputProps?.type === "password" && (
             <Input
               {...inputProps}
               name="passwordCheck"
@@ -53,7 +50,7 @@ export default function SignupForm({
               aria-invalid={!!errorMessage}
               required
             />
-          )}
+          )} */}
 
           <p className="text-destructive text-xs">{errorMessage}</p>
         </div>

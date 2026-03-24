@@ -6,57 +6,53 @@ import {
   Drawer,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/shared/ui/drawer";
 
 interface Props {
-  onClickEmailLogin?: () => void;
+  onLogin?: () => void;
 }
 
-export default function LoginDrawer({ onClickEmailLogin }: Props) {
+export default function LoginDrawer({ onLogin }: Props) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button className="w-full">로그인</Button>
       </DrawerTrigger>
       <DrawerContent className="mx-auto w-full max-w-105">
-        <div className="space-y-4 pb-4">
-          <DrawerHeader>
-            <DrawerTitle>로그인 방법 선택</DrawerTitle>
+        <div>
+          <DrawerHeader className="space-y-1">
+            <DrawerTitle className="text-lg">로그인 방법 선택</DrawerTitle>
             <DrawerDescription>
-              간편 로그인으로 빠르게 시작할 수 있어요.
+              간편 로그인으로 빠르게 시작해 보세요.
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex items-center justify-center gap-x-8 pt-4 pb-8">
             <Button
               variant="ghost"
-              className="bg-naver hover:bg-naver size-10 rounded-full p-2 transition duration-200 hover:brightness-90"
+              className="bg-naver hover:bg-naver size-12 overflow-hidden rounded-full p-2 transition duration-200 hover:brightness-90"
+              aria-label="네이버 로그인 버튼"
             >
-              <img src={NaverLogo} className="size-8 object-cover" />
+              <img src={NaverLogo} className="size-10 object-cover" />
             </Button>
             <Button
               variant="ghost"
-              className="bg-kakao hover:bg-kakao size-10 rounded-full p-2 transition duration-200 hover:brightness-90"
+              className="bg-kakao hover:bg-kakao size-12 overflow-hidden rounded-full p-2 transition duration-200 hover:brightness-90"
+              aria-label="카카오 로그인 버튼"
             >
-              <img src={KakaoLogo} className="size-8 object-cover" />
+              <img src={KakaoLogo} className="size-10 object-cover" />
             </Button>
             <Button
               variant="ghost"
-              className="size-10 rounded-full bg-neutral-100 p-2 transition duration-200 hover:brightness-90"
+              className="size-12 overflow-hidden rounded-full bg-neutral-100 p-2 transition duration-200 hover:brightness-90"
+              aria-label="구글 로그인 버튼"
             >
-              <img src={GoogleLogo} className="size-5 object-cover" />
+              <img src={GoogleLogo} className="size-6 object-cover" />
             </Button>
           </div>
-
-          <DrawerFooter>
-            <Button className="w-full" onClick={onClickEmailLogin}>
-              이메일로 로그인
-            </Button>
-          </DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>
