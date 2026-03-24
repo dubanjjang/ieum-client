@@ -1,4 +1,12 @@
+import { useEffect, useRef, useState } from "react";
 import { MapPinIcon } from "lucide-react";
+
+import PostEmotionButton, {
+  type POST_EMOTICON_TYPE,
+  POST_EMOTICONS,
+} from "@/features/post/ui/post-emotion-button";
+import { cn } from "@/shared/lib/utils";
+import { Button } from "@/shared/ui/button";
 
 interface Props {
   profileImageUrl: string;
@@ -15,6 +23,23 @@ export default function Post({
   content,
   createdAt,
 }: Props) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const [isOverflow, setIsOverflow] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [selectedEmoticon, setSelectedEmoticon] =
+    useState<POST_EMOTICON_TYPE | null>(null);
+
+  useEffect(() => {
+    if (!contentRef.current) {
+      return;
+    }
+
+    setIsOverflow(
+      contentRef.current.scrollHeight > contentRef.current.clientHeight,
+    );
+  }, [content]);
+
   return (
     <div className="bg-background space-y-4 px-5 py-6">
       <div className="flex justify-between">
@@ -41,8 +66,49 @@ export default function Post({
         </div>
       </div>
 
-      <div className="relative mb-6 line-clamp-5 max-h-32 overflow-hidden break-all whitespace-pre-wrap">
-        {content}
+      <div
+        ref={contentRef}
+        className={cn(
+          "relative overflow-hidden break-all whitespace-pre-wrap",
+          isCollapsed ? "max-h-28" : "max-h-fit",
+        )}
+      >
+        <p className="w-full">{content}</p>
+
+        {isOverflow &&
+          (!isCollapsed ? (
+            <Button
+              variant="ghost"
+              className="block h-auto w-full p-0 text-sm text-neutral-500 hover:bg-transparent"
+              onClick={() => setIsCollapsed(true)}
+            >
+              접기
+            </Button>
+          ) : (
+            <Button
+              variant="ghost"
+              className="to-background absolute bottom-0 flex w-full rounded-none bg-linear-to-b from-transparent p-0 pb-1 text-center text-sm text-neutral-500 hover:bg-transparent"
+              onClick={() => setIsCollapsed(false)}
+            >
+              더보기
+            </Button>
+          ))}
+      </div>
+
+      <div className="flex">
+        {Object.keys(POST_EMOTICONS).map((key) => {
+          const type = key as POST_EMOTICON_TYPE;
+          return (
+            <PostEmotionButton
+              key={key}
+              type={type}
+              isAnimated={key === selectedEmoticon}
+              count={0}
+              onClick={() => setSelectedEmoticon(type)}
+              onAnimationComplete={() => setSelectedEmoticon(null)}
+            />
+          );
+        })}
       </div>
     </div>
   );

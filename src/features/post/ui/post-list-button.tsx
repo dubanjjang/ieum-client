@@ -1,4 +1,5 @@
 import LetterImage from "@/features/post/assets/letter.svg";
+import PostList from "@/features/post/ui/post-list";
 import { Button } from "@/shared/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/shared/ui/drawer";
 
@@ -12,9 +13,7 @@ export default function PostListButton() {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="z-101">
-        <div className="bg-muted mt-4 space-y-3">
-          {/* TODO: Post 리스트 렌더링 */}
-        </div>
+        <PostList />
       </DrawerContent>
     </Drawer>
   );
