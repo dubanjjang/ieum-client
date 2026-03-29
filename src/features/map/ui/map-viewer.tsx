@@ -1,38 +1,41 @@
 import { type ReactNode, type Ref, type RefObject } from "react";
 import { LocateFixed } from "lucide-react";
 
-import useLocationContext from "@/entities/map/provider/location-provider";
+import useLocationContext from "@/features/map/provider/location-provider";
 import AddressViewer from "@/features/map/ui/address-viewer";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 
 interface Props {
-  useReverseGeocode?: boolean;
+  initLocation?: naver.maps.LatLng;
   mapContainerRef: Ref<HTMLDivElement>;
   mapRef: RefObject<naver.maps.Map | null>;
   className?: string;
   bottomLeftActions?: ReactNode;
   bottomCenterActions?: ReactNode;
   bottomRightActions?: ReactNode;
+  useReverseGeocode?: boolean;
 }
 
 export default function MapViewer({
-  useReverseGeocode = false,
+  initLocation,
   mapContainerRef,
   mapRef,
   className,
   bottomLeftActions,
   bottomCenterActions,
   bottomRightActions,
+  useReverseGeocode = false,
 }: Props) {
   const { currentLocation } = useLocationContext();
 
   function handleClick() {
-    if (!currentLocation) {
+    const target = initLocation ?? currentLocation;
+    if (!target) {
       return;
     }
 
-    mapRef.current?.panTo(currentLocation);
+    mapRef.current?.panTo(target);
   }
 
   return (

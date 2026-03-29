@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import useLocationContext from "@/entities/map/provider/location-provider";
+import useLocationContext from "@/features/map/provider/location-provider";
 
 export default function useNaverReverseGeocode() {
   const { currentLocation } = useLocationContext();

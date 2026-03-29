@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext } from "react";
 
-import useLocation from "@/entities/map/model/use-location";
+import useLocation from "@/features/map/model/use-location";
 
 interface LocationContextType {
   permitted: boolean;

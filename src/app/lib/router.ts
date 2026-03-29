@@ -4,6 +4,7 @@ import CalendarPage from "@/pages/calendar/ui/calendar-page";
 import HomePage from "@/pages/home/ui/home-page";
 import LoginPage from "@/pages/login/ui/login-page";
 import NotFoundPage from "@/pages/not-found/ui/not-found-page";
+import PostCreatePage from "@/pages/post/ui/post-create-page";
 import ReportPage from "@/pages/report/ui/report-page";
 import SettingPage from "@/pages/setting/setting-page";
 import SignupPage from "@/pages/signup/ui/signup-page";
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
             path: "/home",
             Component: HomePage,
           },
+
           {
             path: "/calendar",
             Component: CalendarPage,
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         Component: SignupPage,
+      },
+      {
+        path: "/post",
+        loader: () => redirect("/post/create"),
+      },
+      {
+        path: "/post/create",
+        Component: PostCreatePage,
       },
       {
         path: "*",

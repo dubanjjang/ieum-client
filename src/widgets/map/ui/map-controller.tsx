@@ -1,17 +1,34 @@
+import { useEffect } from "react";
 import { AlertTriangle } from "lucide-react";
 
-import useLocationContext from "@/entities/map/provider/location-provider";
 import useNaverMap from "@/features/map/model/use-naver-map";
+import useLocationContext from "@/features/map/provider/location-provider";
 import MapViewer from "@/features/map/ui/map-viewer";
 import PostCreateButton from "@/features/post/ui/post-create-button";
 import PostListButton from "@/features/post/ui/post-list-button";
 
 export default function MapController() {
-  const { permitted, currentLocation } = useLocationContext();
+  const { permitted, getCurrentPositionAsync, watchPosition, clearWatch } =
+    useLocationContext();
   const { mapContainerRef, mapRef } = useNaverMap({
-    initLocation: currentLocation,
-    useUserMarker: true,
+    markerOptions: {},
   });
+
+  useEffect(() => {
+    async function init() {
+      try {
+        await getCurrentPositionAsync();
+        watchPosition();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    init();
+    return () => {
+      clearWatch();
+    };
+  }, []);
 
   if (!permitted) {
     return (

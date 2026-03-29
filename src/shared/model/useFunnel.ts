@@ -2,6 +2,8 @@ import { Children, isValidElement, type ReactNode, useState } from "react";
 
 interface Props {
   steps: string[];
+  onFirst?: () => void;
+  onLast?: () => void;
 }
 
 interface FunnelProps {
@@ -13,7 +15,7 @@ interface StepProps {
   children: ReactNode;
 }
 
-export default function useFunnel({ steps }: Props) {
+export default function useFunnel({ steps, onFirst, onLast }: Props) {
   const [step, setStep] = useState(steps[0]);
   const stepIndex = steps.indexOf(step);
 
@@ -25,5 +27,21 @@ export default function useFunnel({ steps }: Props) {
   };
   const FunnelStep = ({ children }: StepProps) => children;
 
-  return { Funnel, FunnelStep, setStep, step, stepIndex };
+  const prevStep = () => {
+    if (stepIndex > 0) {
+      setStep(steps[stepIndex - 1]);
+    } else {
+      onFirst?.();
+    }
+  };
+
+  const nextStep = () => {
+    if (stepIndex < steps.length - 1) {
+      setStep(steps[stepIndex + 1]);
+    } else {
+      onLast?.();
+    }
+  };
+
+  return { Funnel, FunnelStep, setStep, prevStep, nextStep, step, stepIndex };
 }

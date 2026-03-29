@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { getDistance } from "@/entities/map/lib/utils";
+import { getDistance } from "@/features/map/lib/utils";
 
 const MARKER_UPDATE_DISTANCE = 2;
 const FETCH_UPDATE_DISTANCE = 50;
@@ -100,7 +100,6 @@ export default function useLocation() {
           setFetchedLocation(newLocation);
           currentLocationRef.current = newLocation;
           fetchedLocationRef.current = newLocation;
-
           resolve(newLocation);
         },
         (_) => {

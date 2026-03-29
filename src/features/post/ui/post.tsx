@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPinIcon } from "lucide-react";
 
-import PostEmotionButton, {
-  type POST_EMOTICON_TYPE,
-  POST_EMOTICONS,
-} from "@/features/post/ui/post-emotion-button";
+import {
+  type POST_REACTION_TYPE,
+  POST_REACTIONS,
+} from "@/features/post/type/type";
+import PostReactionButton from "@/features/post/ui/post-reaction-button";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 
@@ -28,7 +29,7 @@ export default function Post({
   const [isOverflow, setIsOverflow] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selectedEmoticon, setSelectedEmoticon] =
-    useState<POST_EMOTICON_TYPE | null>(null);
+    useState<POST_REACTION_TYPE | null>(null);
 
   useEffect(() => {
     if (!contentRef.current) {
@@ -96,10 +97,10 @@ export default function Post({
       </div>
 
       <div className="flex">
-        {Object.keys(POST_EMOTICONS).map((key) => {
-          const type = key as POST_EMOTICON_TYPE;
+        {Object.keys(POST_REACTIONS).map((key) => {
+          const type = key as POST_REACTION_TYPE;
           return (
-            <PostEmotionButton
+            <PostReactionButton
               key={key}
               type={type}
               isAnimated={key === selectedEmoticon}
