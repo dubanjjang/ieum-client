@@ -44,10 +44,10 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-accent-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 text-sm leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
+        "group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:ring-primary dark:hover:text-accent-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 text-sm leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md data-[selected-single=true]:ring-2 [&>span]:text-xs [&>span]:opacity-70",
         defaultClassNames.day,
-        day.date.getDay() === 0 && "text-red-500", // 일요일
-        day.date.getDay() === 6 && "text-blue-500", // 토요일
+        day.date.getDay() === 0 && "text-red-500 hover:text-red-500", // 일요일
+        day.date.getDay() === 6 && "text-blue-500 hover:text-blue-500", // 토요일
         className,
       )}
       {...props}
@@ -85,41 +85,53 @@ function Calendar({
         ...formatters,
       }}
       classNames={{
-        root: cn("w-fit", defaultClassNames.root),
+        root: cn("w-fit", defaultClassNames.root, classNames?.root),
         months: cn(
           "relative flex flex-col gap-4 md:flex-row",
           defaultClassNames.months,
+          classNames?.months,
         ),
-        month: cn("flex w-full flex-col gap-4", defaultClassNames.month),
+        month: cn(
+          "flex w-full flex-col gap-4",
+          defaultClassNames.month,
+          classNames?.month,
+        ),
         nav: cn(
           "absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1",
           defaultClassNames.nav,
+          classNames?.nav,
         ),
         button_previous: cn(
           buttonVariants({ variant: buttonVariant }),
           "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
           defaultClassNames.button_previous,
+          classNames?.button_previous,
         ),
         button_next: cn(
           buttonVariants({ variant: buttonVariant }),
           "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
           defaultClassNames.button_next,
+          classNames?.button_next,
         ),
         month_caption: cn(
           "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size)",
           defaultClassNames.month_caption,
+          classNames?.month_caption,
         ),
         dropdowns: cn(
           "flex h-(--cell-size) w-full items-center justify-center gap-1.5 text-sm font-medium",
           defaultClassNames.dropdowns,
+          classNames?.dropdowns,
         ),
         dropdown_root: cn(
           "relative rounded-md border border-input shadow-xs has-focus:border-ring has-focus:ring-[3px] has-focus:ring-ring/50",
           defaultClassNames.dropdown_root,
+          classNames?.dropdown_root,
         ),
         dropdown: cn(
           "absolute inset-0 bg-popover opacity-0",
           defaultClassNames.dropdown,
+          classNames?.dropdown,
         ),
         caption_label: cn(
           "font-medium select-none",
@@ -127,49 +139,69 @@ function Calendar({
             ? "text-sm"
             : "flex h-8 items-center gap-1 rounded-md pr-1 pl-2 text-sm [&>svg]:size-3.5 [&>svg]:text-muted-foreground",
           defaultClassNames.caption_label,
+          classNames?.caption_label,
         ),
-        table: "w-full border-collapse",
-        weekdays: cn("flex", defaultClassNames.weekdays),
+        table: cn("w-full border-collapse", classNames?.table),
+        weekdays: cn(
+          "flex border-y py-1",
+          defaultClassNames.weekdays,
+          classNames?.weekdays,
+        ),
         weekday: cn(
           "flex-1 rounded-md text-[0.8rem] font-normal text-muted-foreground select-none",
           defaultClassNames.weekday,
+          classNames?.weekday,
         ),
-        week: cn("mt-2 flex w-full", defaultClassNames.week),
+        week: cn("mt-2 flex w-full", defaultClassNames.week, classNames?.week),
         week_number_header: cn(
           "w-(--cell-size) select-none",
           defaultClassNames.week_number_header,
+          classNames?.week_number_header,
         ),
         week_number: cn(
           "text-[0.8rem] text-muted-foreground select-none",
           defaultClassNames.week_number,
+          classNames?.week_number,
         ),
         day: cn(
-          "group/day relative aspect-square h-full w-full p-0 text-center select-none [&:last-child[data-selected=true]_button]:rounded-r-md",
+          "group/day relative h-full w-full p-0 text-center select-none [&:last-child[data-selected=true]_button]:rounded-r-md",
           props.showWeekNumber
             ? "[&:nth-child(2)[data-selected=true]_button]:rounded-l-md"
             : "[&:first-child[data-selected=true]_button]:rounded-l-md",
           defaultClassNames.day,
+          classNames?.day,
         ),
         range_start: cn(
           "rounded-l-md bg-accent",
           defaultClassNames.range_start,
+          classNames?.range_start,
         ),
-        range_middle: cn("rounded-none", defaultClassNames.range_middle),
-        range_end: cn("rounded-r-md bg-accent", defaultClassNames.range_end),
+        range_middle: cn(
+          "rounded-none",
+          defaultClassNames.range_middle,
+          classNames?.range_middle,
+        ),
+        range_end: cn(
+          "rounded-r-md bg-accent",
+          defaultClassNames.range_end,
+          classNames?.range_end,
+        ),
         today: cn(
-          "rounded-md bg-accent text-accent-foreground data-[selected=true]:rounded-none",
+          "rounded-md data-[selected=true]:rounded-none",
           defaultClassNames.today,
+          classNames?.today,
         ),
         outside: cn(
           "text-muted-foreground aria-selected:text-muted-foreground",
           defaultClassNames.outside,
+          classNames?.outside,
         ),
         disabled: cn(
           "text-muted-foreground opacity-50",
           defaultClassNames.disabled,
+          classNames?.disabled,
         ),
-        hidden: cn("invisible", defaultClassNames.hidden),
-        ...classNames,
+        hidden: cn("invisible", defaultClassNames.hidden, classNames?.hidden),
       }}
       components={{
         Root: ({ className, rootRef, ...props }) => {
