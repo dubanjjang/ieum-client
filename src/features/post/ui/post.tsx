@@ -4,7 +4,7 @@ import { MapPinIcon } from "lucide-react";
 import {
   type POST_REACTION_TYPE,
   POST_REACTIONS,
-} from "@/features/post/type/type";
+} from "@/entities/post/type/type";
 import PostReactionButton from "@/features/post/ui/post-reaction-button";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";

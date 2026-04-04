@@ -1,5 +1,5 @@
-import type { PostCreateFormData } from "@/features/post/type/type";
-import PostEmotionButton from "@/features/post/ui/post-emotion-button";
+import type { PostCreateFormData } from "@/entities/post/type/type";
+import Emotion from "@/entities/post/ui/emotion";
 import Fade from "@/shared/animation/fade";
 import { Button } from "@/shared/ui/button";
 import Section from "@/shared/ui/section";
@@ -19,20 +19,19 @@ export default function PostSummaryForm({ formData, onSubmit }: Props) {
       className="flex flex-1 flex-col"
     >
       <div className="flex flex-1 flex-col justify-between gap-y-4">
-        <div className="space-y-8">
+        <div className="space-y-10">
           <Fade duration={1} delay={0.5} className="space-y-3">
             <h1 className="font-medium">이 장소에서</h1>
             <MapFixer
               initLocation={formData.location!}
-              className="h-60"
+              className="h-48"
               readOnly
             />
           </Fade>
 
           <Fade duration={1} delay={1.2} className="space-y-3">
-            <h1 className="font-medium">이 감정을 느끼며</h1>
-
-            <PostEmotionButton type={formData.emotion!} selected />
+            <h1 className="self-start font-medium">이 감정을 느끼며</h1>
+            <Emotion type={formData.emotion!} className="ml-3" />
           </Fade>
 
           <Fade duration={1} delay={1.9} className="space-y-3">

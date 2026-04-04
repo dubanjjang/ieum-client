@@ -2,7 +2,7 @@ import {
   type POST_EMOTION_TYPE,
   POST_EMOTIONS,
   type PostCreateFormData,
-} from "@/features/post/type/type";
+} from "@/entities/post/type/type";
 import PostEmotionButton from "@/features/post/ui/post-emotion-button";
 import { Button } from "@/shared/ui/button";
 import Section from "@/shared/ui/section";
@@ -25,7 +25,7 @@ export default function PostEmotionForm({
       className="flex flex-1 flex-col"
     >
       <div className="flex flex-1 flex-col justify-between gap-y-4">
-        <div className="grid grid-cols-3 place-items-center gap-2">
+        <div className="grid grid-cols-3 place-items-center gap-y-6">
           {Object.keys(POST_EMOTIONS).map((item) => {
             const emotion = item as POST_EMOTION_TYPE;
             return (

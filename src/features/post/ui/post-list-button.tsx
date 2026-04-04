@@ -1,4 +1,4 @@
-import LetterImage from "@/features/post/assets/letter.svg";
+import LetterImage from "@/entities/post/assets/letter.svg";
 import PostList from "@/features/post/ui/post-list";
 import { Button } from "@/shared/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/shared/ui/drawer";

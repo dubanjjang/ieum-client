@@ -9,6 +9,7 @@ import MapViewer from "@/features/map/ui/map-viewer";
 
 interface Props {
   initLocation?: naver.maps.LatLng;
+  useReverseGeocode?: boolean;
   readOnly?: boolean;
   className?: string;
   onDragEnd?: (center: naver.maps.LatLng | null) => void;
@@ -16,6 +17,7 @@ interface Props {
 
 export default function MapFixer({
   initLocation,
+  useReverseGeocode = false,
   readOnly = false,
   className,
   onDragEnd,
@@ -123,8 +125,8 @@ export default function MapFixer({
         initLocation={initLocation}
         mapContainerRef={mapContainerRef}
         mapRef={mapRef}
-        className="flex-1 overflow-hidden rounded-md"
-        useReverseGeocode
+        className="flex-1 overflow-hidden rounded-lg border"
+        useReverseGeocode={useReverseGeocode}
       />
 
       {!readOnly && (

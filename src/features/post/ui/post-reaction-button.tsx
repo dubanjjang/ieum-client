@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   type POST_REACTION_TYPE,
   POST_REACTIONS,
-} from "@/features/post/type/type";
+} from "@/entities/post/type/type";
 import { Button } from "@/shared/ui/button";
 
 interface Props {

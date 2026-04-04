@@ -1,4 +1,4 @@
-import type { PostCreateFormData } from "@/features/post/type/type";
+import type { PostCreateFormData } from "@/entities/post/type/type";
 import { Button } from "@/shared/ui/button";
 import Section from "@/shared/ui/section";
 import { Textarea } from "@/shared/ui/textarea";

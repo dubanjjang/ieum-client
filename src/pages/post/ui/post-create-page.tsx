@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import type { PostCreateFormData } from "@/features/post/type/type";
+import type { PostCreateFormData } from "@/entities/post/type/type";
 import Fade from "@/shared/animation/fade";
 import useFunnel from "@/shared/model/useFunnel";
 import PopUpLayout from "@/shared/ui/pop-up-layout";

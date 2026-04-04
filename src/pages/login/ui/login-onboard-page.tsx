@@ -14,7 +14,7 @@ export default function LoginOnBoardPage({ onClickLogin }: Props) {
       </Fade>
 
       <Fade delay={0.4} className="sticky bottom-0">
-        <LoginDrawer onClickEmailLogin={onClickLogin} />
+        <LoginDrawer onLogin={onClickLogin} />
       </Fade>
     </div>
   );
