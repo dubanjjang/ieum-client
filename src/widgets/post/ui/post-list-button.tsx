@@ -1,7 +1,7 @@
 import LetterImage from "@/entities/post/assets/letter.svg";
-import PostList from "@/features/post/ui/post-list";
 import { Button } from "@/shared/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/shared/ui/drawer";
+import PostList from "@/widgets/post/ui/post-list";
 
 export default function PostListButton() {
   return (

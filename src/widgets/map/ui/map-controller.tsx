@@ -5,7 +5,7 @@ import useNaverMap from "@/features/map/model/use-naver-map";
 import useLocationContext from "@/features/map/provider/location-provider";
 import MapViewer from "@/features/map/ui/map-viewer";
 import PostCreateButton from "@/features/post/ui/post-create-button";
-import PostListButton from "@/features/post/ui/post-list-button";
+import PostListButton from "@/widgets/post/ui/post-list-button";
 
 export default function MapController() {
   const { permitted, getCurrentPositionAsync, watchPosition, clearWatch } =

@@ -3,7 +3,7 @@ import { ko } from "date-fns/locale";
 import {
   type POST_EMOTION_TYPE,
   POST_EMOTIONS,
-} from "@/features/post/type/type";
+} from "@/entities/post/type/type";
 import { cn } from "@/shared/lib/utils";
 import { Calendar, CalendarDayButton } from "@/shared/ui/calendar";
 

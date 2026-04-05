@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-import type { TermsData } from "@/features/terms/model/use-terms";
-
 interface SignupData {
   nickname: string;
 }
 
 // TO DO: 회원가입 API 호출 시, 약관 동의 상태(termsData)를 같이 body에 추가해주어야 함
-export default function useSignup(termsData: TermsData) {
+export default function useSignup() {
   const [signupData, setSignupData] = useState<SignupData>({
     nickname: "",
   });

@@ -15,7 +15,7 @@ interface Props {
   onLogin?: () => void;
 }
 
-export default function LoginDrawer({ onLogin }: Props) {
+export default function LoginButton({ onLogin }: Props) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -35,6 +35,7 @@ export default function LoginDrawer({ onLogin }: Props) {
               variant="ghost"
               className="bg-naver hover:bg-naver size-12 overflow-hidden rounded-full p-2 transition duration-200 hover:brightness-90"
               aria-label="네이버 로그인 버튼"
+              onClick={onLogin}
             >
               <img src={NaverLogo} className="size-10 object-cover" />
             </Button>
@@ -42,6 +43,7 @@ export default function LoginDrawer({ onLogin }: Props) {
               variant="ghost"
               className="bg-kakao hover:bg-kakao size-12 overflow-hidden rounded-full p-2 transition duration-200 hover:brightness-90"
               aria-label="카카오 로그인 버튼"
+              onClick={onLogin}
             >
               <img src={KakaoLogo} className="size-10 object-cover" />
             </Button>
@@ -49,6 +51,7 @@ export default function LoginDrawer({ onLogin }: Props) {
               variant="ghost"
               className="size-12 overflow-hidden rounded-full bg-neutral-100 p-2 transition duration-200 hover:brightness-90"
               aria-label="구글 로그인 버튼"
+              onClick={onLogin}
             >
               <img src={GoogleLogo} className="size-6 object-cover" />
             </Button>

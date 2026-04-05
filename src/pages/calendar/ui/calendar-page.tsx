@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import EmotionCalendar from "@/features/calendar/ui/emotion-calendar";
-import PostList from "@/features/post/ui/post-list";
 import { Drawer, DrawerContent } from "@/shared/ui/drawer";
 import Section from "@/shared/ui/section";
+import PostList from "@/widgets/post/ui/post-list";
 
 export default function CalendarPage() {
   const [open, setOpen] = useState(false);

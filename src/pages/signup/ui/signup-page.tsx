@@ -12,8 +12,7 @@ export default function SignupPage() {
 
   const nav = useNavigate();
 
-  const { signupData, setSignupData, errorMessage, validate } =
-    useSignup(termsData);
+  const { signupData, setSignupData, errorMessage, validate } = useSignup();
 
   function handleChangeForm(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
