@@ -16,6 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/shared/ui/chart";
+import PageLayout from "@/shared/ui/page-layout";
 import Section from "@/shared/ui/section";
 
 export const description = "A radar chart with dots";
@@ -49,7 +50,7 @@ export default function ReportPage() {
   }
 
   return (
-    <div className="flex flex-1 flex-col px-5 py-8">
+    <PageLayout>
       <Section
         title="📋 감정 리포트"
         description="월별로 어떤 감정의 메시지를 작성했는지 확인해 보세요."
@@ -130,6 +131,6 @@ export default function ReportPage() {
           )}
         </div>
       </Section>
-    </div>
+    </PageLayout>
   );
 }

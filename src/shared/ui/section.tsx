@@ -16,7 +16,7 @@ export default function Section({
   children,
 }: Props) {
   return (
-    <section className={cn("flex flex-col gap-y-4", className)}>
+    <section className={cn("flex flex-col gap-y-5", className)}>
       <div className="space-y-1.5">
         <div className="flex items-center gap-x-2">
           <h1 className="truncate text-lg font-medium">{title}</h1>

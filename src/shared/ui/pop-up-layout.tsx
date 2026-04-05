@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
+import PageLayout from "@/shared/ui/page-layout";
 
 interface Props {
   title?: string;
@@ -47,7 +48,7 @@ export default function PopUpLayout({
         </div>
       </header>
 
-      <div className="flex flex-1 flex-col px-5 py-8">{children}</div>
+      <PageLayout hasHeader>{children}</PageLayout>
     </div>
   );
 }
