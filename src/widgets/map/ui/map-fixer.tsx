@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { cx } from "class-variance-authority";
 import { AlertTriangle } from "lucide-react";
 
 import useNaverMap from "@/features/map/model/use-naver-map";
 import useLocationContext from "@/features/map/provider/location-provider";
 import { DEFAULT_CIRCLE_RADIUS } from "@/features/map/type/type";
 import MapViewer from "@/features/map/ui/map-viewer";
+import { cn } from "@/shared/lib/utils";
 
 interface Props {
   initLocation?: naver.maps.LatLng;
@@ -120,7 +120,7 @@ export default function MapFixer({
   }
 
   return (
-    <div className={cx("relative flex flex-col", className)}>
+    <div className={cn("relative flex flex-col", className)}>
       <MapViewer
         initLocation={initLocation}
         mapContainerRef={mapContainerRef}
