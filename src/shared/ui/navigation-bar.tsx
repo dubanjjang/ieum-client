@@ -32,7 +32,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: ClipboardList,
   },
   {
-    label: "마이 페이지",
+    label: "마이페이지",
     path: "/setting",
     icon: UserRound,
   },
