@@ -25,11 +25,11 @@ export default function DateChanger({ date, setDate }: Props) {
   }
 
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="text-lg">
-        {`${date.getFullYear() % 100}년 ${date.getMonth() + 1}월의 감정`}
-      </h1>
-      <div className="flex gap-1">
+    <div className="relative">
+      <p className="text-xs text-neutral-500">{date.getFullYear()}</p>
+      <p className="text-lg">{`${date.getMonth() + 1}월의 감정`}</p>
+
+      <div className="absolute right-0 bottom-0 flex gap-1">
         <Button
           variant="ghost"
           size="icon-sm"
