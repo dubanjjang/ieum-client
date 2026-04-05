@@ -9,10 +9,10 @@ export default function PostList() {
   const [sortType, setSortType] = useState<SortType>("latest");
 
   return (
-    <div className="bg-muted mt-4">
+    <div className="bg-muted mt-4 flex h-[75dvh] flex-col">
       <PostSortFilter sortType={sortType} onChange={setSortType} />
 
-      <div className="scrollbar-hide h-[75dvh] space-y-2 overflow-y-auto">
+      <div className="scrollbar-hide min-h-0 flex-1 space-y-2 overflow-y-auto">
         {Array.from({ length: 10 }).map((_, index) => (
           <Post
             key={index}
