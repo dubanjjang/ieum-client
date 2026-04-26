@@ -9,6 +9,7 @@ import ReportPage from "@/pages/report/ui/report-page";
 import SettingPage from "@/pages/setting/setting-page";
 import SignupPage from "@/pages/signup/ui/signup-page";
 import TermsPage from "@/pages/terms/ui/terms-page";
+import WithdrawalPage from "@/pages/withdrawal/ui/withdrawal-page";
 import MainLayout from "@/shared/ui/main-layout";
 import MobileLayout from "@/shared/ui/mobile-layout";
 
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "/post/create",
         Component: PostCreatePage,
+      },
+      {
+        path: "/withdrawal",
+        Component: WithdrawalPage,
       },
       {
         path: "*",

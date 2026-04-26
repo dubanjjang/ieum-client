@@ -140,7 +140,7 @@ export default function TermsForm() {
       <img
         src="/ieum.svg"
         alt="IEUM symbol logo"
-        className="absolute top-1/2 left-1/2 w-64 -translate-x-1/4 -translate-y-1/4 opacity-10"
+        className="pointer-events-none absolute top-1/2 left-1/2 w-64 -translate-x-1/4 -translate-y-1/4 opacity-10"
       />
     </div>
   );
