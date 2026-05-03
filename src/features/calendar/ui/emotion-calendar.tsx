@@ -1,5 +1,6 @@
 import { ko } from "date-fns/locale";
 
+import EmotionAura from "@/entities/calendar/ui/emotion-aura";
 import {
   type POST_EMOTION_TYPE,
   POST_EMOTIONS,
@@ -50,7 +51,7 @@ export default function EmotionCalendar({ onClickDay }: Props) {
             >
               <div
                 className={cn(
-                  "flex size-5 items-center justify-center rounded-full text-xs",
+                  "flex size-5 items-center justify-center self-start rounded-full text-xs",
                   modifiers.today && "bg-primary text-primary-foreground",
                 )}
               >
@@ -58,31 +59,7 @@ export default function EmotionCalendar({ onClickDay }: Props) {
               </div>
 
               {type ? (
-                <div
-                  className={cn(
-                    "aspect-square w-full max-w-7 transition-all duration-800",
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "size-2 rounded-full opacity-50 blur-sm",
-                      POST_EMOTIONS[type].color,
-                    )}
-                    style={{ animationDuration: "1s" }}
-                  />
-                  <div className="flex justify-end">
-                    <div
-                      className={cn(
-                        "size-3 animate-pulse rounded-full opacity-70 blur-sm",
-                        POST_EMOTIONS[type].color,
-                      )}
-                      style={{
-                        animationDuration: "2.5s",
-                        animationDelay: "1s",
-                      }}
-                    />
-                  </div>
-                </div>
+                <EmotionAura type={type} />
               ) : (
                 <div className="aspect-square w-full max-w-7 rounded-full border border-dashed border-neutral-300" />
               )}
