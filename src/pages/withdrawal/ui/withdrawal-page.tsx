@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 
+import WithdrawalContent from "@/pages/withdrawal/ui/withdrawal-content";
 import Fade from "@/shared/animation/fade";
+import { Button } from "@/shared/ui/button";
 import PageLayout from "@/shared/ui/page-layout";
 import Section from "@/shared/ui/section";
-import WithdrawalContent from "@/pages/withdrawal/ui/withdrawal-content";
-import { Button } from "@/shared/ui/button";
 
 export default function WithdrawalPage() {
   const nav = useNavigate();

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
+import BoyIcon from "@/pages/withdrawal/assets/3dicons-boy-dynamic-gradient.svg";
 import CalendarIcon from "@/pages/withdrawal/assets/3dicons-calender-dynamic-gradient.svg";
 import MailIcon from "@/pages/withdrawal/assets/3dicons-mail-dynamic-gradient.svg";
-import BoyIcon from "@/pages/withdrawal/assets/3dicons-boy-dynamic-gradient.svg";
 import CountUp from "@/shared/animation/count-up";
 import Fade from "@/shared/animation/fade";
 
