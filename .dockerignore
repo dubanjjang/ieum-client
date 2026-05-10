@@ -1,35 +1,35 @@
-# 의존성 (CI에서 pnpm install로 설치됨, 이미지에 포함될 필요 없음)
+# =============================================================
+# 멀티스테이지 빌드(Dockerfile)의 builder 스테이지가
+# 도커 안에서 직접 `pnpm install && pnpm build` 를 수행한다.
+# 따라서 src/, public/, package.json, tsconfig*.json, vite.config.ts,
+# index.html 등 빌드에 필요한 파일들은 컨텍스트에 포함되어야 한다.
+# 여기서는 "이미지에 들어가면 안 되거나, 빌드 컨텍스트 업로드를 무겁게 만드는 것"만 제외.
+# =============================================================
+
+# 의존성: 도커 안에서 pnpm install로 설치하므로 호스트 것은 보낼 필요 없음
 node_modules
 
-# 소스 코드 (빌드 결과물 dist/만 이미지에 들어가면 됨)
-src
-public
+# 호스트의 빌드 산출물: 도커가 builder 스테이지에서 새로 만든다
+dist
 
-# 설정/도구 (런타임에 불필요)
+# Git/CI/IDE 메타데이터
 .git
+.gitignore
 .github
 .vscode
 .idea
 .husky
-*.md
-*.config.ts
-*.config.js
-tsconfig*.json
-package.json
-pnpm-lock.yaml
-pnpm-workspace.yaml
-eslint.config.*
-prettier.config.*
-postcss.config.*
-tailwind.config.*
-index.html
 
-# 환경 변수 (보안상 절대 이미지에 넣지 말 것)
+# 환경 변수 (이미지에 절대 들어가면 안 됨)
 .env
 .env.*
 
-# 로그/캐시/테스트
+# 로그/캐시/테스트 산출물
 *.log
 .cache
 coverage
 .vite
+
+# Docker 자체 메타파일 (컨텍스트에 포함되어도 빌드엔 영향 없지만 관습적으로 제외)
+Dockerfile
+.dockerignore
