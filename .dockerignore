@@ -1,0 +1,35 @@
+# 의존성 (CI에서 pnpm install로 설치됨, 이미지에 포함될 필요 없음)
+node_modules
+
+# 소스 코드 (빌드 결과물 dist/만 이미지에 들어가면 됨)
+src
+public
+
+# 설정/도구 (런타임에 불필요)
+.git
+.github
+.vscode
+.idea
+.husky
+*.md
+*.config.ts
+*.config.js
+tsconfig*.json
+package.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+eslint.config.*
+prettier.config.*
+postcss.config.*
+tailwind.config.*
+index.html
+
+# 환경 변수 (보안상 절대 이미지에 넣지 말 것)
+.env
+.env.*
+
+# 로그/캐시/테스트
+*.log
+.cache
+coverage
+.vite
